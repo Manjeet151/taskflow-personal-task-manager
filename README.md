@@ -1,13 +1,13 @@
 # TaskFlow - Personal Task Manager
 
-TaskFlow is a full-stack personal task manager built for the Studio Graphene Full Stack Developer assessment. I chose Exercise 1: Personal Task Manager. The app allows a user to create, view, update, complete, filter, search, and delete personal tasks. It uses a React frontend, a Node.js/Express backend, and JSON file storage for simple persistence.
+TaskFlow is a full-stack personal task manager built for the Studio Graphene Full Stack Developer assessment. I chose **Exercise 1: Personal Task Manager**.
+
+The app allows a user to create, view, update, complete, filter, search, and delete personal tasks. It uses a React frontend, a Node.js/Express backend, and JSON file storage for simple persistence.
 
 ## Live Demo Links
 
-Frontend: `<add-frontend-deployment-link-here>`
-Backend API: `<add-backend-deployment-link-here>`
-
-> Note: The live links will be added after deployment.
+Frontend: https://taskflow-personal-task-manager.netlify.app
+Backend API: https://taskflow-personal-task-manager-x9p8.onrender.com/api/tasks
 
 ## Tech Stack
 
@@ -29,7 +29,7 @@ Backend API: `<add-backend-deployment-link-here>`
 
 * JSON file storage using `server/data/tasks.json`
 
-This storage approach was chosen to keep the project simple and aligned with the assignment requirements. For a production version, I would use SQLite, PostgreSQL, or MongoDB for more reliable persistence.
+JSON file storage was chosen to keep the project simple and aligned with the assignment requirements. For a production version, I would use SQLite, PostgreSQL, or MongoDB for more reliable persistence.
 
 ## Features
 
@@ -53,8 +53,8 @@ Make sure Node.js is installed on your system.
 ### 1. Clone the repository
 
 ```bash
-git clone <your-github-repo-url>
-cd taskflow
+git clone https://github.com/Manjeet151/taskflow-personal-task-manager.git
+cd taskflow-personal-task-manager
 ```
 
 ### 2. Install and run the backend
@@ -93,6 +93,12 @@ Base URL for local development:
 
 ```bash
 http://localhost:5000/api/tasks
+```
+
+Live API URL:
+
+```bash
+https://taskflow-personal-task-manager-x9p8.onrender.com/api/tasks
 ```
 
 ### Get all tasks
@@ -203,7 +209,7 @@ Response:
 ## Project Structure
 
 ```bash
-taskflow/
+taskflow-personal-task-manager/
 │
 ├── client/
 │   ├── public/
@@ -247,17 +253,20 @@ taskflow/
 * Overdue tasks are visually highlighted.
 * Empty, loading, and error states are handled.
 * Frontend production build runs successfully using `npm run build`.
+* The app is deployed with Netlify for the frontend and Render for the backend.
 
 ## Deployment Notes
 
 The project is structured as a monorepo with separate `client` and `server` folders.
 
-Planned deployment:
+Deployment:
 
-* Frontend: Netlify or Vercel
+* Frontend: Netlify
 * Backend: Render
 
 The backend currently uses JSON file storage. This works well locally and keeps the project simple. On some free hosting environments, file-based data may reset after redeploys or server restarts. In a production version, I would replace JSON file storage with SQLite, PostgreSQL, or MongoDB.
+
+Also, because the backend is hosted on Render's free tier, the first request after inactivity may take some extra time while the server wakes up.
 
 ## Next Steps
 
