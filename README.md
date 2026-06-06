@@ -6,8 +6,9 @@ The app allows a user to create, view, update, complete, filter, search, and del
 
 ## Live Demo Links
 
-Frontend: https://taskflow-personal-task-manager.netlify.app
-Backend API: https://taskflow-personal-task-manager-x9p8.onrender.com/api/tasks
+Frontend: [TaskFlow Live App](https://taskflow-personal-task-manager.netlify.app)
+
+Backend API: [TaskFlow API](https://taskflow-personal-task-manager-x9p8.onrender.com/api/tasks)
 
 ## Tech Stack
 
