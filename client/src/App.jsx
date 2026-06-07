@@ -3,6 +3,7 @@ import {
   getTasks,
   createTask,
   updateTask,
+  reorderTasks,
   deleteTask,
 } from "./api/tasksApi";
 
@@ -61,6 +62,37 @@ function App() {
     );
   };
 
+  const handleReorderTasks = async (reorderedVisibleTasks) => {
+    const previousTasks = tasks;
+
+    try {
+      setError("");
+
+      const visibleIds = filteredTasks.map((task) => task.id);
+      let visibleIndex = 0;
+
+      const mergedTasks = tasks.map((task) => {
+        if (visibleIds.includes(task.id)) {
+          const replacementTask = reorderedVisibleTasks[visibleIndex];
+          visibleIndex++;
+          return replacementTask;
+        }
+
+        return task;
+      });
+
+      setTasks(mergedTasks);
+
+      const orderedIds = mergedTasks.map((task) => task.id);
+      const updatedTasks = await reorderTasks(orderedIds);
+
+      setTasks(updatedTasks);
+    } catch (error) {
+      setTasks(previousTasks);
+      setError(error.message);
+    }
+  };
+
   const handleDeleteTask = async (id) => {
     await deleteTask(id);
 
@@ -79,6 +111,8 @@ function App() {
 
     return matchesFilter && matchesSearch;
   });
+
+  const canReorder = filteredTasks.length > 1;
 
   return (
     <div className="app">
@@ -100,7 +134,9 @@ function App() {
           <div className="tasks-header">
             <div>
               <h2>Your Tasks</h2>
-              <p className="muted-text">Newest tasks appear first.</p>
+              <p className="muted-text">
+                Drag and drop tasks to reorder them.
+              </p>
             </div>
           </div>
 
@@ -126,6 +162,8 @@ function App() {
             <TaskList
               tasks={filteredTasks}
               filter={filter}
+              canReorder={canReorder}
+              onReorderTasks={handleReorderTasks}
               onToggleTask={handleToggleTask}
               onUpdateTask={handleUpdateTask}
               onDeleteTask={handleDeleteTask}

@@ -399,3 +399,22 @@ textarea:focus {
     justify-content: flex-start;
   }
 }
+.drag-handle {
+  color: #94a3b8;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: grab;
+  user-select: none;
+  margin-top: 3px;
+}
+
+.task-item[draggable="true"] {
+  cursor: grab;
+}
+
+.task-item.dragging {
+  opacity: 0.55;
+  border-color: #4f46e5;
+  background: #eef2ff;
+}

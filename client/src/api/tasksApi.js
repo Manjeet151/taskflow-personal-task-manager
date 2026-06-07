@@ -1,4 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api/tasks";
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api/tasks";
+
 export const getTasks = async () => {
   const response = await fetch(API_URL);
 
@@ -40,6 +42,24 @@ export const updateTask = async (id, taskData) => {
 
   if (!response.ok) {
     throw new Error(data.message || "Failed to update task");
+  }
+
+  return data;
+};
+
+export const reorderTasks = async (orderedIds) => {
+  const response = await fetch(`${API_URL}/reorder`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ orderedIds }),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Failed to reorder tasks");
   }
 
   return data;

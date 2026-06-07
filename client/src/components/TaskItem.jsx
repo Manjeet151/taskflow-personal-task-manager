@@ -1,6 +1,17 @@
 import { useState } from "react";
 
-function TaskItem({ task, onToggleTask, onUpdateTask, onDeleteTask }) {
+function TaskItem({
+  task,
+  onToggleTask,
+  onUpdateTask,
+  onDeleteTask,
+  isDraggable,
+  isDragging,
+  onDragStart,
+  onDragOver,
+  onDrop,
+  onDragEnd,
+}) {
   const [isEditing, setIsEditing] = useState(false);
 
   const [editData, setEditData] = useState({
@@ -86,8 +97,23 @@ function TaskItem({ task, onToggleTask, onUpdateTask, onDeleteTask }) {
   }
 
   return (
-    <li className={`task-item ${task.completed ? "completed" : ""}`}>
+    <li
+      className={`task-item ${task.completed ? "completed" : ""} ${
+        isDragging ? "dragging" : ""
+      }`}
+      draggable={isDraggable}
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+      onDragEnd={onDragEnd}
+    >
       <div className="task-main">
+        {isDraggable && (
+          <span className="drag-handle" title="Drag to reorder">
+            ⋮⋮
+          </span>
+        )}
+
         <label className="checkbox-wrapper">
           <input
             type="checkbox"
@@ -112,7 +138,10 @@ function TaskItem({ task, onToggleTask, onUpdateTask, onDeleteTask }) {
       </div>
 
       <div className="task-actions">
-        <button className="secondary-button small" onClick={() => setIsEditing(true)}>
+        <button
+          className="secondary-button small"
+          onClick={() => setIsEditing(true)}
+        >
           Edit
         </button>
 
