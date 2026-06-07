@@ -46,6 +46,7 @@ JSON file storage was chosen to keep the project simple and aligned with the ass
 * Show empty state messages when there are no tasks.
 * Handle loading and error states.
 * Responsive layout for desktop and mobile screens.
+* Reorder tasks using drag-and-drop.
 
 ## How to Run Locally
 
