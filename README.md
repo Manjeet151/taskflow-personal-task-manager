@@ -2,7 +2,7 @@
 
 TaskFlow is a full-stack personal task manager built for the Studio Graphene Full Stack Developer assessment. I chose **Exercise 1: Personal Task Manager**.
 
-The app allows a user to create, view, update, complete, filter, search, and delete personal tasks. It uses a React frontend, a Node.js/Express backend, and JSON file storage for simple persistence.
+The app allows a user to create, view, update, complete, filter, search, reorder, and delete personal tasks. It uses a React frontend, a Node.js/Express backend, and JSON file storage for simple persistence.
 
 ## Live Demo Links
 
@@ -35,7 +35,7 @@ JSON file storage was chosen to keep the project simple and aligned with the ass
 ## Features
 
 * Add a new task with a required title, optional description, and optional due date.
-* View all tasks sorted by creation date, newest first.
+* View all tasks with newest tasks shown first by default.
 * Mark a task as complete or incomplete.
 * Edit a task's title, description, and due date.
 * Delete a task with a confirmation prompt.
@@ -119,6 +119,7 @@ Response:
     "description": "Build the task manager app",
     "dueDate": "2026-06-08",
     "completed": false,
+    "order": 0,
     "createdAt": "2026-06-05T10:30:00.000Z",
     "updatedAt": "2026-06-05T10:30:00.000Z"
   }
@@ -150,6 +151,7 @@ Response:
   "description": "Build the task manager app",
   "dueDate": "2026-06-08",
   "completed": false,
+  "order": 0,
   "createdAt": "2026-06-05T10:30:00.000Z",
   "updatedAt": "2026-06-05T10:30:00.000Z"
 }
@@ -189,9 +191,41 @@ Response:
   "description": "Updated description",
   "dueDate": "2026-06-09",
   "completed": true,
+  "order": 0,
   "createdAt": "2026-06-05T10:30:00.000Z",
   "updatedAt": "2026-06-05T11:00:00.000Z"
 }
+```
+
+### Reorder tasks
+
+```http
+PATCH /api/tasks/reorder
+```
+
+Request body:
+
+```json
+{
+  "orderedIds": ["task-id-1", "task-id-2", "task-id-3"]
+}
+```
+
+Response:
+
+```json
+[
+  {
+    "id": "task-id-1",
+    "title": "Complete assignment",
+    "description": "Build the task manager app",
+    "dueDate": "2026-06-08",
+    "completed": false,
+    "order": 0,
+    "createdAt": "2026-06-05T10:30:00.000Z",
+    "updatedAt": "2026-06-05T11:00:00.000Z"
+  }
+]
 ```
 
 ### Delete a task
@@ -250,7 +284,8 @@ taskflow-personal-task-manager/
 * Backend CRUD API is working.
 * React frontend is connected to the backend API.
 * Tasks are persisted in a JSON file during local development.
-* Add, edit, delete, complete/incomplete toggle, filter, and search features work.
+* Add, edit, delete, complete/incomplete toggle, filter, search, and drag-and-drop features work.
+* Drag-and-drop task reordering works across task views.
 * Active/completed task counts are displayed.
 * Overdue tasks are visually highlighted.
 * Empty, loading, and error states are handled.
@@ -277,8 +312,8 @@ With more time, I would improve the project by adding:
 * Backend tests for task API endpoints.
 * Toast notifications for create, update, and delete actions.
 * Better date validation.
+* Keyboard-accessible drag-and-drop support.
 * SQLite or database-backed persistence.
-* Drag-and-drop task reordering.
 * User authentication for personal task ownership.
 
 ## AI Usage
